@@ -1,0 +1,12 @@
+com\nf147\sss\dao\CommonDAO.class
+com\nf147\sss\demo\Invoice.class
+com\nf147\sss\entity\Author.class
+App.class
+com\nf147\sss\demo\Customer.class
+com\nf147\sss\entity\Blog.class
+com\nf147\sss\handler\FakeIntegerHandler.class
+com\nf147\sss\plugin\MyPlugin.class
+com\nf147\sss\handler\OurObjectFactory.class
+com\nf147\sss\entity\Comment.class
+com\nf147\sss\demo\Bill.class
+com\nf147\sss\ds\MyDataSource.class

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.nf147.sss.dao.CustomerDao">
+
+    <!--nested resultmap-->
+
+    <resultMap id="rmInvoice" type="invoice" autoMapping="true">
+        <association property="customer" resultMap="rmCustormer" />
+        <association property="billingInfo" javaType="billingInfo" autoMapping="true" columnPrefix="billing_" />
+    </resultMap>
+
+    <resultMap id="rmCustormer" type="customer" autoMapping="true">
+        <collection property="invoices" ofType="invoice" resultMap="rmInvoice" />
+    </resultMap>
+
+    <select id="getInvoiceById" resultMap="rmInvoice">
+        select
+          i.invoice_id,
+          i.invoice_date,
+          i.billing_address,
+          i.billing_city,
+          i.billing_state,
+          i.billing_country,
+          i.billing_postalCode,
+          i.total,
+          c.*
+        from invoice i
+         left join customer c on i.customer_id = c.customer_id
+         where invoice_id = #{id}
+    </select>
+
+    <select id="getCustomerById" resultMap="rmCustormer">
+        select
+          c.*,
+          i.invoice_id,
+          i.invoice_date,
+          i.billing_address,
+          i.billing_city,
+          i.billing_state,
+          i.billing_country,
+          i.billing_postalcode,
+          i.total
+        from customer c
+        left join invoice i on i.customer_id = c.customer_id
+        where c.customer_id = #{id}
+    </select>
+</mapper>
